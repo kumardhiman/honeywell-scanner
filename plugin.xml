@@ -67,15 +67,4 @@
         <source-file src="src/android/LibraryProject/res/raw/buzz.ogg" target-dir="res/raw" />
         <source-file src="src/android/LibraryProject/res/values/strings.xml" target-dir="res/values" />
 
-        <!-- plugman cannot merge - prepare manual merge -->
-        <config-file target="res/values/strings.xml" parent="/resources">
-            <string name="File_Clear_screen">Clear screen</string>
-            <string name="SymbologySettingMenu">Symbology Setting</string>
-            <string name="ClearScreenMenu">Clear Screen</string>
-            <string name="app_name">DecodeSample Activity</string>
-            <string name="PROMOT_CLICK_SCAN_BUTTON">Please click scan button or scan key to scan barcode.</string>
-            <string name="RESTORESYMBOLOGYSETTING">Default symbology setting</string>
-        </config-file>
-
-
     </platform>

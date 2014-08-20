@@ -23,6 +23,8 @@ public class HoneywellScanner extends CordovaPlugin {
     private static final String DATA = "data";
     private static final String TYPE = "type";
 
+    private static final String LOG_TAG = "HoneywellScanner";
+
     private CallbackContext callbackContext;
 
     public HoneywellScanner() {
@@ -42,7 +44,7 @@ public class HoneywellScanner extends CordovaPlugin {
 
     public void trigger() {
         Intent intentTrigger = new Intent(TRIGGER_INTENT);
-        intentTrigger.addCategory(Intent.CATEGORY_DEFFAULT);
+        intentTrigger.addCategory(Intent.CATEGORY_DEFAULT);
 
         intentTrigger.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
         this.cordova.startActivityForResult((CordovaPlugin) this, intentTrigger, REQUEST_CODE);

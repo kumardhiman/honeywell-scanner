@@ -7,8 +7,8 @@
     <description>Plugin to use the Honeywell Black Dolphin device's hardware barcode scanner</description>
     <license>MIT</license>
 
-    <repo></repo>
-    <issue></issue>
+    <repo>https://github.com/val-pinkman/honeywell-scanner</repo>
+    <issue>https://github.com/val-pinkman/honeywell-scanner/issue</issue>
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
@@ -57,7 +57,7 @@
         <source-file src="src/android/LibraryProject/res/drawable/android_focused.jpg" target-dir="res/drawable" />
         <source-file src="src/android/LibraryProject/res/drawable/android_normal.jpg" target-dir="res/drawable" />
         <source-file src="src/android/LibraryProject/res/drawable/android_pressed.jpg" target-dir="res/drawable" />
-        <source-file src="src/android/LibraryProject/res/drawable/mainactivity.jpg" target-dir="res/drawable" />
+        <source-file src="src/android/LibraryProject/res/drawable/mainactivity.png" target-dir="res/drawable" />
         <source-file src="src/android/LibraryProject/res/drawable-hdpi/icon.png" target-dir="res/drawable-hdpi" />
         <source-file src="src/android/LibraryProject/res/drawable-ldpi/icon.png" target-dir="res/drawable-ldpi" />
         <source-file src="src/android/LibraryProject/res/drawable-mdpi/icon.png" target-dir="res/drawable-mdpi" />

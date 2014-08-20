@@ -61,7 +61,6 @@
         <source-file src="src/android/LibraryProject/res/drawable-hdpi/icon.png" target-dir="res/drawable-hdpi" />
         <source-file src="src/android/LibraryProject/res/drawable-ldpi/icon.png" target-dir="res/drawable-ldpi" />
         <source-file src="src/android/LibraryProject/res/drawable-mdpi/icon.png" target-dir="res/drawable-mdpi" />
-        <source-file src="src/android/LibraryProject/res/drawable-xhdpi/icon.png" target-dir="res/drawable-xhdpi" />
         <source-file src="src/android/LibraryProject/res/layout/main.xml" target-dir="res/layout" />
         <source-file src="src/android/LibraryProject/res/raw/beep.ogg" target-dir="res/raw" />
         <source-file src="src/android/LibraryProject/res/raw/buzz.ogg" target-dir="res/raw" />

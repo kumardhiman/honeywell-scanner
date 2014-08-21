@@ -24,7 +24,7 @@
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="HoneywellScanner">
-                <param name="android-package" value="com.honey.scanner.HoneywellScanner" />
+                <param name="android-package" value="com.honeywell.scanner.HoneywellScanner" />
             </feature>
         </config-file>
 

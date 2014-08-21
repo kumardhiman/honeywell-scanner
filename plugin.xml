@@ -15,11 +15,12 @@
     </engines>
 
     <js-module src="www/honeywellscanner.js" name="HoneywellScanner">
-        <clobbers target="com.honeywell.scanner" />
+        <clobbers target="HoneywellScanner" />
     </js-module>
 
     <!-- Android -->
     <platform name="android">
+
         <source-file src="src/android/com/honeywell/scanner/HoneywellScanner.java" target-dir="src/com/honeywell/scanner" />
 
         <config-file target="res/xml/config.xml" parent="/*">
@@ -75,7 +76,6 @@
             <string name="PROMOT_CLICK_SCAN_BUTTON">Please click scan button or scan key to scan barcode.</string>
             <string name="RESTORESYMBOLOGYSETTING">Default symbology setting</string>
         </config-file>
-
-
     </platform>
+
 </plugin>

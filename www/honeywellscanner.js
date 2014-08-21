@@ -7,5 +7,4 @@ honeywellScanner.prototype.trigger = function() {
     exec(null, null, 'HoneywellScanner', 'trigger', []);
 };
 
-var scanner = new honeywellScanner();
-module.exports = scanner;
+module.exports = honeywellScanner;

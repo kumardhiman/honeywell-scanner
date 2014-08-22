@@ -44,6 +44,7 @@ public class HoneywellScanner extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        this.callbackContext = callbackContext;
         if (action.equals(TRIGGER)) {
             final long duration = args.getLong(0);
             cordova.getActivity().runOnUiThread(new Runnable() {

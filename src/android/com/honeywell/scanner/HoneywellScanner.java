@@ -69,6 +69,7 @@ public class HoneywellScanner extends CordovaPlugin {
         mDecodeManager = new DecodeManager(this.cordova.getActivity().getApplicationContext(), ScanResultHandler);
 
         try {
+            mDecodeManager.enableSymbology(CommonDefine.SymbologyID.SYM_QR);
             mDecodeManager.doDecode(SCANTIMEOUT);
         } catch (RemoteException e) {
             // TODO Auto-generated catch block

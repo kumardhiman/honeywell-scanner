@@ -33,7 +33,7 @@
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity
-                android:name="ScanDemoMainActivity"
+                android:name="com.honeywell.scanner.ScanDemoMainActivity"
                 android:screenOrientation="portrait"
                 android:clearTaskOnLaunch="true"
                 android:configChanges="orientation|keyboardHidden"

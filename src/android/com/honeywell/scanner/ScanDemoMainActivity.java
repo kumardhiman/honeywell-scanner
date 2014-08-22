@@ -62,8 +62,6 @@ public final class ScanDemoMainActivity extends Activity {
 			mDecodeManager = new DecodeManager(this,ScanResultHandler);
 		}
 
-		DoScan();
-
 		// SoundManager.getInstance();
 		// SoundManager.initSounds(getBaseContext());
 		// SoundManager.loadSounds();

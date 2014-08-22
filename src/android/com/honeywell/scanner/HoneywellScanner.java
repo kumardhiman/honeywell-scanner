@@ -5,8 +5,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
+import android.os.RemoteException;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -49,7 +55,6 @@ public class HoneywellScanner extends CordovaPlugin {
 
     @Override
     public void onResume(boolean multitasking) {
-        super.onResume();
 
         if (mDecodeManager == null) {
             mDecodeManager = new DecodeManager(this.cordova.getActivity().getApplicationContext(), ScanResultHandler);

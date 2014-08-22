@@ -22,6 +22,8 @@
     <platform name="android">
 
         <source-file src="src/android/com/honeywell/scanner/HoneywellScanner.java" target-dir="src/com/honeywell/scanner" />
+        <source-file src="src/android/com/honeywell/scanner/ScanDemoMainActivity.java" target-dir="src/com/honeywell/scanner" />
+        <source-file src="src/android/com/honeywell/scanner/SoundManager.java" target-dir="src/com/honeywell/scanner" />
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="HoneywellScanner">

@@ -54,13 +54,6 @@ public class HoneywellScanner extends CordovaPlugin {
     }
 
     @Override
-    public void onResume(boolean multitasking) {
-
-        this.mDecodeManager = new DecodeManager(this.cordova.getActivity().getApplicationContext(), ScanResultHandler);
-        // this.mDecodeManager = new DecodeManager(this.cordova.getActivity().getApplicationContext(), ScanResultHandler);
-    }
-
-    @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
 
         if(action.equals(TRIGGER)) {
@@ -72,6 +65,9 @@ public class HoneywellScanner extends CordovaPlugin {
     }
 
     public void trigger() {
+
+        mDecodeManager = new DecodeManager(this.cordova.getActivity().getApplicationContext(), ScanResultHandler);
+
         try {
             mDecodeManager.doDecode(SCANTIMEOUT);
         } catch (RemoteException e) {

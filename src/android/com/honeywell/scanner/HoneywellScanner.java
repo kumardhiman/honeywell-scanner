@@ -49,8 +49,8 @@ public class HoneywellScanner extends CordovaPlugin {
             final long duration = args.getLong(0);
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-                    // trigger();
-                    callbackContext.trigger(); // Thread-safe.
+                    trigger();
+                    callbackContext.success(); // Thread-safe.
                 }
             });
             return true;

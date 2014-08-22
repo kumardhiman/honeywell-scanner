@@ -58,9 +58,9 @@ public final class ScanDemoMainActivity extends Activity {
 			mDecodeManager = new DecodeManager(this,ScanResultHandler);
 		}
 
-		SoundManager.getInstance();
-		SoundManager.initSounds(getBaseContext());
-		SoundManager.loadSounds();
+		// SoundManager.getInstance();
+		// SoundManager.initSounds(getBaseContext());
+		// SoundManager.loadSounds();
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public final class ScanDemoMainActivity extends Activity {
 	public void onDestroy() {
 		super.onDestroy();
 
-		SoundManager.cleanup();
+		// SoundManager.cleanup();
 		if (mDecodeManager != null) {
 			try {
 
@@ -140,7 +140,7 @@ public final class ScanDemoMainActivity extends Activity {
 				mScanAccount++;
 				String strDecodeResult = "";
 				DecodeResult decodeResult = (DecodeResult) msg.obj;
-				SoundManager.playSound(1, 1);
+				// SoundManager.playSound(1, 1);
 
 				byte codeid = decodeResult.codeId;
 				byte aimid = decodeResult.aimId;
@@ -153,7 +153,7 @@ public final class ScanDemoMainActivity extends Activity {
 				break;
 
 			case DecodeManager.MESSAGE_DECODER_FAIL: {
-				SoundManager.playSound(2, 1);
+				// SoundManager.playSound(2, 1);
 				mDecodeResultEdit.setText("Decode Result::Scan fail");
 
 			}

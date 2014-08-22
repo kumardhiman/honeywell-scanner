@@ -30,16 +30,30 @@ public class HoneywellScanner extends CordovaPlugin {
     public HoneywellScanner() {
     }
 
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-        this.callbackContext = callbackContext;
+    // @Override
+    // public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
+    //     this.callbackContext = callbackContext;
 
-        if(action.equals(TRIGGER)) {
-            trigger();
-        } else {
-            return false;
+    //     if(action.equals(TRIGGER)) {
+    //         trigger();
+    //     } else {
+    //         return false;
+    //     }
+    //     return true;
+    // }
+
+    @Override
+    public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        if (action.equals(TRIGGER)) {
+            final long duration = args.getLong(0);
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    trigger();
+                }
+            });
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void trigger() {

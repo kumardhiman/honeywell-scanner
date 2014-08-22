@@ -67,10 +67,9 @@ public class HoneywellScanner extends CordovaPlugin {
     public void trigger() {
 
         mDecodeManager = new DecodeManager(this.cordova.getActivity().getApplicationContext(), ScanResultHandler);
-        mDecodeManager.getSymConfigActivityOpeartor();
 
         try {
-            SymConfigActivityOpeartor.start();
+            mDecodeManager.doDecode(SCANTIMEOUT);
         } catch (RemoteException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

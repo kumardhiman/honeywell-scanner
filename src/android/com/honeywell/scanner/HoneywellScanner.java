@@ -30,33 +30,33 @@ public class HoneywellScanner extends CordovaPlugin {
     public HoneywellScanner() {
     }
 
-    // @Override
-    // public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-    //     this.callbackContext = callbackContext;
-
-    //     if(action.equals(TRIGGER)) {
-    //         trigger();
-    //     } else {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-
     @Override
-    public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
         this.callbackContext = callbackContext;
-        if (action.equals(TRIGGER)) {
-            final long duration = args.getLong(0);
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    trigger();
-                    callbackContext.success(); // Thread-safe.
-                }
-            });
-            return true;
+
+        if(action.equals(TRIGGER)) {
+            trigger();
+        } else {
+            return false;
         }
-        return false;
+        return true;
     }
+
+    // @Override
+    // public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+    //     this.callbackContext = callbackContext;
+    //     if (action.equals(TRIGGER)) {
+    //         final long duration = args.getLong(0);
+    //         cordova.getActivity().runOnUiThread(new Runnable() {
+    //             public void run() {
+    //                 trigger();
+    //                 callbackContext.success(); // Thread-safe.
+    //             }
+    //         });
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     public void trigger() {
         Intent intentTrigger = new Intent(TRIGGER_INTENT);

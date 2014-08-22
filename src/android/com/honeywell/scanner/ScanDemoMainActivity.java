@@ -28,6 +28,10 @@ public final class ScanDemoMainActivity extends Activity {
 	private final int ID_SCANSETTING = 0x12;
 	private final int ID_CLEAR_SCREEN = 0x13;
 
+	public static final int SymbologySettingMenu=0x7f050001;
+	public static final int ClearScreenMenu=0x7f050002;
+	public static final int PROMOT_CLICK_SCAN_BUTTON=0x7f050004;
+
 	private DecodeManager mDecodeManager = null;
 	private EditText mDecodeResultEdit = null;
     private final int SCANKEY = 0x94;
@@ -45,8 +49,8 @@ public final class ScanDemoMainActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		setContentView(R.layout.main);
-		initializeUI();
+		// setContentView(R.layout.main);
+		// initializeUI();
 
 	}
 
@@ -66,8 +70,8 @@ public final class ScanDemoMainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, ID_SCANSETTING, 0, R.string.SymbologySettingMenu);
-		menu.add(0, ID_CLEAR_SCREEN, 1, R.string.ClearScreenMenu);
+		menu.add(0, ID_SCANSETTING, 0, SymbologySettingMenu);
+		menu.add(0, ID_CLEAR_SCREEN, 1, ClearScreenMenu);
 
 		return true;
 	}
@@ -82,7 +86,7 @@ public final class ScanDemoMainActivity extends Activity {
 		}
 		case ID_CLEAR_SCREEN: {
 
-			String strPromotScan = this.getResources().getString(R.string.PROMOT_CLICK_SCAN_BUTTON);
+			String strPromotScan = this.getResources().getString(PROMOT_CLICK_SCAN_BUTTON);
 			mDecodeResultEdit.setText(strPromotScan);
 
 			return true;

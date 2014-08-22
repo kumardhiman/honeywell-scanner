@@ -51,74 +51,6 @@ public final class ScanDemoMainActivity extends Activity {
 	}
 
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-		switch (keyCode) {
-		case KeyEvent.KEYCODE_ENTER:
-				try {
-					if (mbKeyDown) {
-						DoScan();
-						mbKeyDown = false;
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			return true;
-		case KeyEvent.KEYCODE_BACK:
-			this.finish();
-			return true;
-        case KeyEvent.KEYCODE_UNKNOWN:
-        	if(event.getScanCode() == SCANKEY || event.getScanCode() == 87 || event.getScanCode() == 88) {
-				try {
-					if (mbKeyDown) {
-						DoScan();
-						mbKeyDown = false;
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        	}
-        	return true;
-		default:
-			return super.onKeyDown(keyCode, event);
-		}
-	}
-
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		switch (keyCode) {
-		case KeyEvent.KEYCODE_ENTER:
-			try {
-				mbKeyDown = true;
-				cancleScan();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return true;
-		case KeyEvent.KEYCODE_BACK:
-			this.finish();
-			return true;
-
-        case KeyEvent.KEYCODE_UNKNOWN:
-        	if(event.getScanCode() == SCANKEY  || event.getScanCode() == 87 || event.getScanCode() == 88) {
-    			try {
-    				mbKeyDown = true;
-    				cancleScan();
-    			} catch (Exception e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
-    			}
-        	}
-        	return true;
-		default:
-			return super.onKeyUp(keyCode, event);
-		}
-	}
-
-	@Override
 	protected void onResume() {
 		super.onResume();
 
@@ -190,40 +122,6 @@ public final class ScanDemoMainActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	private void initializeUI() {
-		final Button button = (Button) findViewById(R.id.scanbutton);
-		mDecodeResultEdit = (EditText) findViewById(R.id.edittext_scanresult);
-		button.setOnTouchListener(new Button.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
-				final int action = event.getAction();
-				switch (action) {
-				case MotionEvent.ACTION_DOWN:
-					button.setBackgroundResource(R.drawable.android_pressed);
-						try {
-							DoScan();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-					break;
-				case MotionEvent.ACTION_UP:
-					try {
-						button.setBackgroundResource(R.drawable.android_normal);
-						cancleScan();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					break;
-				}
-				return true;
-			}
-		});
 	}
 
 	private void DoScan() throws Exception {

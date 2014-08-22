@@ -22,7 +22,7 @@
     <platform name="android">
 
         <source-file src="src/android/com/honeywell/scanner/HoneywellScanner.java" target-dir="src/com/honeywell/scanner" />
-        <source-file src="src/android/com/honeywell/scanner/ScanDemoMainActivity.java" target-dir="src/com/honeywell/scanner" />
+        <!-- <source-file src="src/android/com/honeywell/scanner/ScanDemoMainActivity.java" target-dir="src/com/honeywell/scanner" /> -->
         <!-- <source-file src="src/android/com/honeywell/scanner/SoundManager.java" target-dir="src/com/honeywell/scanner" /> -->
 
         <config-file target="res/xml/config.xml" parent="/*">
@@ -31,7 +31,7 @@
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+       <!--  <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity
                 android:name="com.honeywell.scanner.ScanDemoMainActivity"
                 android:screenOrientation="portrait"
@@ -44,7 +44,7 @@
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
             </activity>
-        </config-file>
+        </config-file> -->
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.VIBRATE" />

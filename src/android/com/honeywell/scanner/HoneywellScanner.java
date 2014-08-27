@@ -12,10 +12,13 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 
 import com.honeywell.decodemanager.DecodeManager;
@@ -23,28 +26,16 @@ import com.honeywell.decodemanager.barcode.CommonDefine;
 import com.honeywell.decodemanager.barcode.DecodeResult;
 
 public class HoneywellScanner extends CordovaPlugin {
-    public static final int REQUEST_CODE = 0x0ba7c0de;
 
-    private final int ID_CLEAR_SCREEN = 0x13;
-
-    public static final int SymbologySettingMenu=0x7f050001;
-    public static final int ClearScreenMenu=0x7f050002;
-    public static final int PROMOT_CLICK_SCAN_BUTTON=0x7f050004;
-
-    private DecodeManager mDecodeManager = null;
-    private EditText mDecodeResultEdit = null;
     private final int SCANKEY = 0x94;
     private final int SCANTIMEOUT = 5000;
+    private DecodeManager mDecodeManager = null;
     long mScanAccount = 0;
-    private boolean mbKeyDown = true;
+    private boolean scanInProgress = false;
+    private boolean initialized = false;
 
     private static final String TRIGGER = "trigger";
-    private static final String TRIGGER_INTENT = "com.honeywell.scanner.TRIGGER";
-    private static final String CANCELLED = "cancelled";
-    private static final String FORMAT = "format";
-    private static final String TEXT = "text";
-    private static final String DATA = "data";
-    private static final String TYPE = "type";
+    private static final String INITIALIZE = "initialize";
 
     private static final String LOG_TAG = "HoneywellScanner";
 
@@ -54,9 +45,34 @@ public class HoneywellScanner extends CordovaPlugin {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(LOG_TAG, "on destroy");
+
+
+        if (mDecodeManager != null) {
+            try {
+                mDecodeManager.release();
+                mDecodeManager = null;
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
 
-        if(action.equals(TRIGGER)) {
+        this.callbackContext = callbackContext;
+        PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
+        result.setKeepCallback(true);
+        this.callbackContext.sendPluginResult(result);
+
+        if(action.equals(INITIALIZE)) {
+            initialize();
+
+        } else if(action.equals(TRIGGER)) {
             trigger();
         } else {
             return false;
@@ -64,17 +80,38 @@ public class HoneywellScanner extends CordovaPlugin {
         return true;
     }
 
-    public void trigger() {
-
+    public void initialize() {
+        Log.i(LOG_TAG, "init decoder");
         mDecodeManager = new DecodeManager(this.cordova.getActivity().getApplicationContext(), ScanResultHandler);
+    }
+
+    public void trigger() {
+        Log.i(LOG_TAG, "trigger");
+
+        if (scanInProgress) {
+            Log.i(LOG_TAG, "trigger");
+            return;
+        }
+
+        Log.i(LOG_TAG, "trigger");
 
         try {
+            Log.i(LOG_TAG, "do scan");
+            scanInProgress = true;
             mDecodeManager.enableSymbology(CommonDefine.SymbologyID.SYM_QR);
             mDecodeManager.doDecode(SCANTIMEOUT);
+
         } catch (RemoteException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    private void cancelScan() throws Exception {
+        Log.i(LOG_TAG, "cancel");
+
+        scanInProgress = false;
+        mDecodeManager.cancelDecode();
     }
 
     private Handler ScanResultHandler = new Handler() {
@@ -84,7 +121,6 @@ public class HoneywellScanner extends CordovaPlugin {
                 mScanAccount++;
                 String strDecodeResult = "";
                 DecodeResult decodeResult = (DecodeResult) msg.obj;
-                // SoundManager.playSound(1, 1);
 
                 byte codeid = decodeResult.codeId;
                 byte aimid = decodeResult.aimId;
@@ -93,19 +129,34 @@ public class HoneywellScanner extends CordovaPlugin {
                 strDecodeResult = "Decode Result::"+ decodeResult.barcodeData + "\r\n" + "codeid::"+ "(" + String.valueOf((char) codeid) +"/"+  String.valueOf((char) aimid)+")" + "\r\n" + "Length:: " + iLength
                         + "  " + "Count:: " + mScanAccount + "\r\n";
 
-                mDecodeResultEdit.setText(strDecodeResult);
+                Log.i(LOG_TAG, "success: " + strDecodeResult);
+                scanInProgress = false;
+
+                PluginResult result1 = new PluginResult(PluginResult.Status.OK, decodeResult.barcodeData);
+                result1.setKeepCallback(false);
+                callbackContext.sendPluginResult(result1);
+
                 break;
 
             case DecodeManager.MESSAGE_DECODER_FAIL: {
-                // SoundManager.playSound(2, 1);
-                mDecodeResultEdit.setText("Decode Result::Scan fail");
+                Log.i(LOG_TAG, "Decode Result::Scan fail");
+                scanInProgress = false;
 
+                PluginResult result2 = new PluginResult(PluginResult.Status.OK, "");
+                result2.setKeepCallback(false);
+                callbackContext.sendPluginResult(result2);
             }
             break;
             case DecodeManager.MESSAGE_DECODER_READY:
             {
                 ArrayList<java.lang.Integer> arry =  mDecodeManager.getSymConfigActivityOpeartor().getAllSymbologyId();
                 boolean b = arry.isEmpty();
+                Log.i(LOG_TAG, "MESSAGE_DECODER_READY");
+                initialized = true;
+
+                PluginResult result3 = new PluginResult(PluginResult.Status.OK, "ready");
+                result3.setKeepCallback(false);
+                callbackContext.sendPluginResult(result3);
             }
             break;
             default:
